@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Notizbuch</string>
+    <string name="neue_notiz">NEUE NOTIZ</string>
+    <string name="ok">OK</string>
+</resources>
