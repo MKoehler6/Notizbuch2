@@ -55,7 +55,7 @@ public class TagebuchDB extends SQLiteOpenHelper {
             try {
                 while (cursor.moveToNext()) {
                     String date = cursor.getString(0);
-                    dates.add(date);
+                    dates.add(0, date);// wird an Position 0 eingefügt
                 }
                 Log.d("MEINLOGreadDate", dates.toString());
                 return dates;
@@ -81,7 +81,7 @@ public class TagebuchDB extends SQLiteOpenHelper {
                 while (cursor.moveToNext()) {
                     Integer id = cursor.getInt(0);
                     String idString = id.toString();
-                    ids.add(idString);
+                    ids.add(0, idString);// wird an Position 0 eingefügt
                 }
                 Log.d("MEINLOGreadDate", ids.toString());
                 return ids;
@@ -106,7 +106,7 @@ public class TagebuchDB extends SQLiteOpenHelper {
             try {
                 while (cursor.moveToNext()) {
                     String date = cursor.getString(1);
-                    notizen.add(date);
+                    notizen.add(0, date); // wird an Position 0 eingefügt
                 }
                 Log.d("MEINLOGreadNotiz", notizen.toString());
                 return notizen;

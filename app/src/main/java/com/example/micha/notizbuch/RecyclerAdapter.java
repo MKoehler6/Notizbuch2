@@ -33,8 +33,7 @@ public class RecyclerAdapter extends Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.eine_zeile, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.eine_zeile, parent, false);
         return new ListViewHolder(view);
     }
 
