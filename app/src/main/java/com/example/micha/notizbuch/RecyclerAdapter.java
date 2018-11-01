@@ -22,6 +22,7 @@ public class RecyclerAdapter extends Adapter {
     CardView cv;
     EditText et;
     String id;
+    String textDate;
     int positionAngeklickt;
 
     RecyclerAdapter(TagebuchDB db, Context context, CardView cv, EditText et) {
@@ -68,8 +69,8 @@ public class RecyclerAdapter extends Adapter {
             String tag = date.substring(8);
             String monat = date.substring(5,7);
             String jahr = date.substring(0,4);
-            String text = tag + "." + monat + "." + jahr;
-            mItemText1.setText(text);
+            textDate = tag + "." + monat + "." + jahr;
+            mItemText1.setText(textDate);
             mItemText2.setText(db.readNotiz().get(position));
         }
 

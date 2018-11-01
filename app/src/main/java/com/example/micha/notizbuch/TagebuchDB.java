@@ -108,7 +108,7 @@ public class TagebuchDB extends SQLiteOpenHelper {
                     String date = cursor.getString(1);
                     notizen.add(0, date); // wird an Position 0 eingefügt
                 }
-                Log.d("MEINLOGreadNotiz", notizen.toString());
+                //Log.d("MEINLOGreadNotiz", notizen.toString());
                 return notizen;
 
             } finally {
