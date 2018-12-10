@@ -16,14 +16,16 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnNeuerSchub;
-    private Button btnOK;
+    private Button btnZurueck;
+    private Button btnSpeichern;
     public CardView cardView;
     EditText editText;
     TagebuchDB db = new TagebuchDB(this);
@@ -49,14 +51,25 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-        btnOK = findViewById(R.id.button3);
-        btnOK.setOnClickListener(new View.OnClickListener() {
+        btnZurueck = findViewById(R.id.button3);
+        btnSpeichern = findViewById(R.id.button2);
+        btnZurueck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 db.insertText(adapter.id, editText.getText().toString());
                 cardView.setVisibility(View.INVISIBLE);
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(btnOK.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(btnZurueck.getWindowToken(), 0);
+                adapter.notifyDataSetChanged();
+                }
+        });
+        btnSpeichern.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.insertText(adapter.id, editText.getText().toString());
+                cardView.setVisibility(View.INVISIBLE);
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(btnSpeichern.getWindowToken(), 0);
                 adapter.notifyDataSetChanged();
 
                 new AddNotizToDB().execute(adapter.id, adapter.textDate, editText.getText().toString());
@@ -81,18 +94,18 @@ public class MainActivity extends AppCompatActivity {
 
             String body = null;
             try {
-                body = "method=" + "INSERT" + "&" + "id=" + URLEncoder.encode(id, "UTF-8") + "&" +
+                body = "key=" + "rsHUibV" + "&" + "id=" + URLEncoder.encode(id, "UTF-8") + "&" +
                         "date=" + URLEncoder.encode(date, "UTF-8") + "&" +
                         "notiz=" + URLEncoder.encode(notiz, "UTF-8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
 
-            String address = "http://www.koehlerplay.de/upload/test.php";
+            String address = "https://www.koehlerplay.de/upload/test.php";
             URL url = null;
             try {
                 url = new URL(address);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 
                 connection.setRequestMethod("POST");
                 connection.setDoInput(true);
@@ -113,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 for (String line; (line = reader.readLine()) != null; ) {
                     Log.d("Notiz: param", "> " + line);
                 }
-
                 writer.close();
                 reader.close();
             } catch (Exception e) {
