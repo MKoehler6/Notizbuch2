@@ -26,8 +26,11 @@ public class MainActivity extends AppCompatActivity {
     private Button btnNeuerSchub;
     private Button btnZurueck;
     private Button btnSpeichern;
+    private Button btnPasswortOK;
     public CardView cardView;
+    public CardView cardViewPasswort;
     EditText editText;
+    EditText editTextPasswort;
     TagebuchDB db = new TagebuchDB(this);
     RecyclerAdapter adapter;
 
@@ -38,6 +41,21 @@ public class MainActivity extends AppCompatActivity {
         cardView = findViewById(R.id.cardView);
         cardView.setVisibility(View.INVISIBLE);
         editText = findViewById(R.id.editText2);
+        cardViewPasswort = findViewById(R.id.cardViewPasswort);
+        cardViewPasswort.setVisibility(View.VISIBLE);
+        editTextPasswort = findViewById(R.id.editTextPasswort);
+        btnPasswortOK = findViewById(R.id.buttonOK);
+        btnPasswortOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextPasswort.getText().toString().equals("jepp6")) {
+                    cardViewPasswort.setVisibility(View.INVISIBLE);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(btnZurueck.getWindowToken(), 0);
+                }
+            }
+        });
+
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         adapter = new RecyclerAdapter(db, this, cardView, editText);
         recyclerView.setAdapter(adapter);

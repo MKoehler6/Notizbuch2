@@ -3,4 +3,5 @@
     <string name="neue_notiz">NEUE NOTIZ</string>
     <string name="zurück">ZURÜCK</string>
     <string name="speichern">SPEICHERN</string>
+    <string name="bitte_paswort_eingeben">Bitte Paswort eingeben</string>
 </resources>
